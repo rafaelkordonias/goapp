@@ -71,7 +71,7 @@ You can change the message and send multiple times.
 <button id="open">Open</button>
 <button id="close">Close</button>
 <p><input id="input" type="text" value="{}">
-<button id="send">Reset</button>
+<button id="send">Send</button>
 </form>
 </td><td valign="top" width="50%">
 <div id="output" style="max-height: 70vh;overflow-y: scroll;"></div>
