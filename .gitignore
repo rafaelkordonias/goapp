@@ -60,3 +60,6 @@ Thumbs.db
 /private
 *.code-workspace
 bin/*
+
+# Air Tmp folder
+*tmp
