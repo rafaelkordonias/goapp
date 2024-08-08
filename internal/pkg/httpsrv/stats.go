@@ -17,9 +17,9 @@ func (w *sessionStats) inc() {
 
 func (s *Server) incStats(id string) {
 	// Find and increment.
-	for _, ws := range s.sessionStats {
-		if ws.id == id {
-			ws.inc()
+	for index := range s.sessionStats {
+		if s.sessionStats[index].id == id {
+			s.sessionStats[index].inc()
 			return
 		}
 	}
