@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"flag"
 	"log"
 	"net/http"
@@ -13,6 +14,12 @@ import (
 
 	"github.com/gorilla/websocket"
 )
+
+// Struct of server response message
+type responseMessage struct {
+	Iteration int    `json:"iteration"`
+	Value     string `json:"value"`
+}
 
 func main() {
 	// Parse command-line flags
@@ -71,7 +78,15 @@ func main() {
 						log.Printf("conn #%d: read error: %v", connID, err)
 						return
 					}
-					log.Printf("[conn #%d] response: %s", connID, message)
+
+					// Unmarshal the response from the server in order to log
+					var msg responseMessage
+					if err := json.Unmarshal(message, &msg); err != nil {
+						log.Printf("conn #%d: failed to unmarshal message: %v", connID, err)
+						continue
+					}
+
+					log.Printf("[conn #%d] iteration: %d, value: %s", connID, msg.Iteration, msg.Value)
 				}
 			}
 		}()
